@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: rfid_admin
+      POSTGRES_PASSWORD: supersecretpassword
+      POSTGRES_DB: rfid_enterprise
+    ports:
+      - "5432:5432" # Local files may access database through port 5432
+    volumes:
+      - /home/ubuntu/Documents/repos/rfid-enterprise-system/database/schema.sql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080" # Management panel is at http://localhost:080
