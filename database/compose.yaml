@@ -1,18 +1,23 @@
+# Use postgres/example user/password credentials
+
 services:
+
   db:
     image: postgres
     restart: always
-    environment:
-      POSTGRES_USER: rfid_admin
-      POSTGRES_PASSWORD: supersecretpassword
-      POSTGRES_DB: rfid_enterprise
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
     ports:
-      - "5432:5432" # Local files may access database through port 5432
+      - "5432:5432"
     volumes:
-      - /home/ubuntu/Documents/repos/rfid-enterprise-system/database/schema.sql
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: rfid_system
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - "8080:8080" # Management panel is at http://localhost:080
+      - 8080:8080
