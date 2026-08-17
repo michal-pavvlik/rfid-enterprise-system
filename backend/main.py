@@ -3,12 +3,6 @@ from fastapi import Depends, FastAPI
 from pydantic import BaseModel
 from sqlmodel import Field, Session, SQLModel, create_engine
 
-class Item(BaseModel):
-    name: str
-    description: str
-    price: float
-    tax: float
-
 class Worker(SQLModel, table=True):
     id_worker: int = Field(primary_key=True)
     name: str
@@ -38,17 +32,3 @@ def create_worker(worker: Worker, session: SessionDep) -> Worker:
     session.commit()
     session.refresh(worker)
     return worker
-
-
-@app.get("/rfid-enterprise-system")
-async def root():
-    return {"message": "Hello World"}
-
-@app.post("rfid-enterprise-system/items")
-async def create_item(item: Item):
-    return item
-
-@app.get("/rfid-enterprise-system/{item_id}")
-async def read_item(item_id: int):
-    return {"message": "You written " + str(item_id)}
-
