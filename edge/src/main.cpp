@@ -11,6 +11,13 @@
 MFRC522 rfid(SS_PIN, RST_PIN);
 
 void setup() {
+  for (int i = 0 ; i < EEPROM.length() ; i++) {
+    EEPROM.write(i, 0);
+  }
+  int id_gate = 1;
+  EEPROM.put(0, id_gate);
+
+
   Serial.begin(9600);
   SPI.begin(); // init SPI bus
   rfid.PCD_Init(); // init MFRC522
