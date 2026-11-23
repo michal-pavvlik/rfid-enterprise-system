@@ -1,0 +1,7 @@
+A privilege decides who is able to access resources. Privileges split between two.
+1. Access key
+Who is able to pass which access gate. For example an IT acces key is able to pass both IT resources access gates and default gates, a user with defualt access key privilege is not able to pass through IT access gate.
+2. System account
+Privileges of a system account decide how much possibiliteis would be granted for user. Base privileges:
+- security: Can view gate access history
+- admin: Able to add rfid keys, users, gates and change privileges. Also can view access gate history. 
